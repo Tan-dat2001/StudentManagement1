@@ -9,7 +9,7 @@ public class testMain {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        DanhSachSinhVien dssv = new DanhSachSinhVien();
+        DanhSachSinhVien dssv = new  DanhSachSinhVien();
         int choice = 0;
         do{
             System.out.println("-------menu-------");
@@ -18,6 +18,7 @@ public class testMain {
                         "1. Add student. \n" +
                         "2. Show information of student. \n" +
                         "3. Edit information of students. \n" +
+                        "4. Remove a Student by Id. \n"  +
                         "0. Exit."
             );
             System.out.println("Enter your option here:");
@@ -35,7 +36,10 @@ public class testMain {
                 dssv.ShowInfor();
             } else if (choice == 3) {
                 dssv.editStudent();
-            }
+            } else if (choice == 4) {
+                dssv.removeStudentById();
+            } else if (choice == 0)
+                break;
 
         }while(choice != 0);
     }

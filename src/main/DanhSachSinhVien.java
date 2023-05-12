@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class DanhSachSinhVien {
     private static ArrayList<SinhVien> danhsach;
-    private Scanner sc;
+//    private Scanner sc;
     public DanhSachSinhVien(){
         danhsach = new ArrayList<SinhVien>();
     }
@@ -17,53 +17,89 @@ public class DanhSachSinhVien {
         danhsach.add(sv);
     }
     public void ShowInfor() {
-        for (SinhVien sinhVien : danhsach) {
-            System.out.println(sinhVien);
+        if(danhsach.isEmpty()){
+            System.out.println("Student List is empty");
+        }else{
+            for (SinhVien sinhVien : danhsach) {
+                System.out.println(sinhVien);
+            }
         }
+
     }
 
-    public int findById(String id){
+    public SinhVien findById(String id){
         for (SinhVien sinhVien:danhsach) {
-            if(sinhVien.getId().equals() )
+            if(sinhVien.getId().equals(id)){
+                return sinhVien;
+            }
         }
-        return
+        return null;
     }
     public void editStudent(){
-        System.out.println("Enter index you want to edit: ");
-        int indexOfStudent = sc.nextInt();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter id of Student you want to edit: ");
+        String idSinhVien = sc.nextLine();
+        SinhVien sinhVien = findById(idSinhVien);
+
+        if(sinhVien == null){
+            System.out.println("This student does not exist...");
+            return;
+        }
 
         System.out.println("which options do you want to edit: \n"
-                        + "1. Edit id of student. \n"
-                        + "2. Edit name of student. \n"
-                        + "3. Edit date of birth. \n"
-                        + "4. Edit average mark. \n"
+                + "1. Edit id of student. \n"
+                + "2. Edit name of student. \n"
+                + "3. Edit date of birth. \n"
+                + "4. Edit average mark. \n"
         );
         int choice = sc.nextInt();
+        sc.nextLine();
         while(choice > 4 || choice < 1){
-            System.out.println("Please, enter 1 to 3, again: ");
+            System.out.println("Please, enter 1 to 4, again: ");
             choice = sc.nextInt();
+            sc.nextLine();
         }
         switch (choice){
             case 1:
                 System.out.println("Set id: ");
                 String idEdit = sc.nextLine();
-                danhsach.get(indexOfStudent).setId(idEdit);
+                sinhVien.setId(idEdit);
+                System.out.println("Edited...");
                 break;
             case 2:
                 System.out.println("Set name: ");
                 String nameEdit = sc.nextLine();
-                danhsach.get(indexOfStudent).setName(nameEdit);
+                sinhVien.setName(nameEdit);
+                System.out.println("Edited...");
                 break;
             case 3:
                 System.out.println("Set date of birth: ");
                 int dobEdit = sc.nextInt();
-                danhsach.get(indexOfStudent).setDob(dobEdit);
+                sc.nextLine();
+                sinhVien.setDob(dobEdit);
+                System.out.println("Edited...");
                 break;
             case 4:
                 System.out.println("Set average mark: ");
                 float dtbEdit = sc.nextFloat();
-                danhsach.get(indexOfStudent).setDtb(dtbEdit);
+                sc.nextLine();
+                sinhVien.setDtb(dtbEdit);
+                System.out.println("Edited...");
                 break;
+        }
+    }
+
+    public void removeStudentById(){
+        System.out.println("Enter id of Student you want to delete: ");
+        Scanner sc = new Scanner(System.in);
+        String idSinhVien = sc.nextLine();
+        SinhVien sinhVien = findById(idSinhVien);
+
+        if(sinhVien != null){
+            danhsach.remove(sinhVien);
+            System.out.println("Deleted");
+        }else{
+            System.out.println("Dont find Id you've just entered.");
         }
     }
 }
